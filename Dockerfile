@@ -8,12 +8,14 @@ RUN export GO111MODULE=on && \
 FROM alpine
 LABEL maintainer="Abreto Fu <m@abreto.net>"
 
+VOLUME [ "/srv" ]
+WORKDIR /srv
+
 COPY --from=builder /build/caddy /usr/bin
 COPY Caddyfile /etc
 
 RUN apk add --no-cache openssh-client git
 
 EXPOSE 80 443
-VOLUME [ "/srv" ]
 
 ENTRYPOINT [ "/usr/bin/caddy", "--conf", "/etc/Caddyfile", "--logs", "stdout" ]
