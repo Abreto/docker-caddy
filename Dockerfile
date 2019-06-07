@@ -6,7 +6,7 @@ RUN curl https://getcaddy.com | bash -s personal tls.dns.gandi
 FROM alpine
 LABEL maintainer="Abreto Fu <m@abreto.net>"
 
-ENV ACME_AGREE="false"
+ENV ACME_AGREE="true"
 
 VOLUME [ "/srv" ]
 WORKDIR /srv
