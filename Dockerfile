@@ -20,4 +20,4 @@ RUN apk add --no-cache openssh-client \
 
 EXPOSE 80 443 2015
 
-ENTRYPOINT [ "caddy", "--conf", "/etc/Caddyfile", "--log", "stdout" ]
+ENTRYPOINT [ "caddy", "-conf", "/etc/Caddyfile", "-log", "stdout" ]
