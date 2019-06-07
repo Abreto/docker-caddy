@@ -6,6 +6,8 @@ RUN curl https://getcaddy.com | bash -s personal tls.dns.gandi
 FROM alpine
 LABEL maintainer="Abreto Fu <m@abreto.net>"
 
+ENV ACME_AGREE="false"
+
 VOLUME [ "/srv" ]
 WORKDIR /srv
 
@@ -20,4 +22,4 @@ RUN apk add --no-cache openssh-client \
 
 EXPOSE 80 443 2015
 
-ENTRYPOINT [ "caddy", "-conf", "/etc/Caddyfile", "-log", "stdout" ]
+ENTRYPOINT [ "caddy", "-agree=$ACME_AGREE", "-conf", "/etc/Caddyfile", "-log", "stdout" ]
