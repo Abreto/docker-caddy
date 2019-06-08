@@ -1,7 +1,7 @@
 FROM alpine as build
 
 RUN apk add curl ca-certificates bash
-RUN curl https://getcaddy.com | bash -s personal tls.dns.gandi
+RUN curl https://getcaddy.com | bash -s personal http.forwardproxy,tls.dns.gandi
 
 FROM alpine
 LABEL maintainer="Abreto Fu <m@abreto.net>"
