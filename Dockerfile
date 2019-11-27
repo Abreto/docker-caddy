@@ -1,7 +1,7 @@
 FROM alpine as installer
 
 RUN apk add curl ca-certificates bash && \
-    (curl https://getcaddy.com | bash -s personal http.forwardproxy,http.git,tls.dns.gandi)
+    (curl https://getcaddy.com | bash -s personal)
 
 FROM alpine
 LABEL maintainer="Abreto FU <m@abreto.net>"
@@ -20,4 +20,5 @@ RUN apk add --no-cache openssh-client \
 
 EXPOSE 80 443 2015
 
-ENTRYPOINT [ "sh", "-c", "caddy", "-conf", "/etc/Caddyfile", "-log", "stdout" ]
+ENTRYPOINT [ "sh", "-c", "caddy", "-log", "stdout" ]
+CMD [ "-conf", "/etc/Caddyfile" ]
