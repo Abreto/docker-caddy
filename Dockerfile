@@ -10,8 +10,11 @@ VOLUME [ "/srv" ]
 WORKDIR /srv
 
 COPY --from=installer /usr/local/bin/caddy /usr/local/bin/
-COPY Caddyfile /.caddy/caddyfilecontainer/
+COPY Caddyfile /caddyfilecontainer/
 COPY index.html /srv
+
+ENV CADDYPATH=/.caddy
+VOLUME ${CADDYPATH}/acme
 
 RUN apk add --no-cache openssh-client \
     git \
@@ -20,4 +23,4 @@ RUN apk add --no-cache openssh-client \
 
 EXPOSE 80 443 2015
 
-ENTRYPOINT [ "sh", "-c", "caddy", "-conf", "/.caddy/caddyfilecontainer/Caddyfile", "-log", "stdout" ]
+ENTRYPOINT [ "caddy", "-conf", "/caddyfilecontainer/Caddyfile", "-log", "stdout" ]
