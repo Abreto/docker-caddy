@@ -1,7 +1,7 @@
 FROM alpine as installer
 
-RUN apk add curl ca-certificates bash
-RUN curl https://getcaddy.com | bash -s personal http.forwardproxy,tls.dns.gandi
+RUN apk add curl ca-certificates bash && \
+    (curl https://getcaddy.com | bash -s personal http.forwardproxy,http.git,tls.dns.gandi)
 
 FROM alpine
 LABEL maintainer="Abreto FU <m@abreto.net>"
